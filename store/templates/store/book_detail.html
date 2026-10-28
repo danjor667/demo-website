@@ -1,0 +1,20 @@
+{% extends "store/base.html" %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'book_list' %}">← All books</a></p>
+<article class="book-detail">
+  <h1>{{ book.title }}</h1>
+  <p class="author">by {{ book.author }} · {{ book.get_category_display }}</p>
+  <p>{{ book.description }}</p>
+  <p class="price">${{ book.price }}</p>
+
+  <form method="post" class="add-to-cart">
+    {% csrf_token %}
+    <label>Quantity {{ form.quantity }}</label>
+    <button type="submit">Add to cart</button>
+    {{ form.quantity.errors }}
+  </form>
+</article>
+{% endblock %}

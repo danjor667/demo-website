@@ -1,0 +1,130 @@
+:root {
+  --ink: #1f2933;
+  --muted: #61707f;
+  --line: #dde3ea;
+  --accent: #b5462f;
+  --accent-ink: #ffffff;
+  --paper: #fbf8f3;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo { font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+.site-nav { display: flex; gap: 1.25rem; }
+.site-nav a { color: var(--ink); text-decoration: none; }
+.nav-toggle { display: none; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+.site-footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size: 0.875rem; }
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+}
+.button-secondary { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+.button-link { background: none; color: var(--accent); padding: 0; text-decoration: underline; }
+
+input, select, textarea {
+  font: inherit;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+}
+
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.filters input[type="search"] { flex: 1 1 220px; }
+
+.book-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.book-card a {
+  display: block;
+  height: 100%;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.book-card a:hover { border-color: var(--accent); }
+.book-card h2 { font-size: 1.05rem; margin: 0 0 0.25rem; }
+.author { color: var(--muted); margin: 0; }
+.price { font-weight: 600; }
+
+.pagination { display: flex; gap: 0.5rem; margin-top: 1.5rem; }
+.pagination a, .pagination .current {
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+}
+.pagination .current { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.book-detail { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; }
+.add-to-cart { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.add-to-cart input { width: 5rem; }
+
+.cart-table { width: 100%; border-collapse: collapse; background: var(--card); }
+.cart-table th, .cart-table td { padding: 0.6rem; border-bottom: 1px solid var(--line); text-align: left; }
+.discount-form { display: flex; gap: 0.5rem; margin: 1rem 0; }
+.totals { display: grid; grid-template-columns: max-content auto; gap: 0.25rem 1.5rem; }
+.totals dd { margin: 0; }
+.totals .grand { font-weight: 700; font-size: 1.15rem; }
+
+.notice { padding: 0.75rem 1rem; border-radius: 6px; background: #e8f3ec; }
+.notice-error { background: #fbe9e6; }
+.empty { color: var(--muted); }
+
+.feedback-button {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.18);
+}
+.feedback-dialog { border: none; border-radius: 10px; padding: 0; width: min(440px, calc(100% - 2rem)); }
+.feedback-dialog::backdrop { background: rgb(0 0 0 / 0.35); }
+.feedback-form { display: grid; gap: 0.75rem; padding: 1.5rem; }
+.feedback-form h2 { margin: 0; font-size: 1.2rem; }
+.feedback-form label { display: grid; gap: 0.25rem; font-size: 0.9rem; }
+.feedback-status { margin: 0; min-height: 1.5em; color: var(--muted); }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
+
+@media (max-width: 640px) {
+  .nav-toggle { display: block; background: none; color: var(--ink); font-size: 1.4rem; padding: 0.25rem 0.5rem; }
+  .site-header { flex-wrap: wrap; }
+  .site-nav { display: none; width: 100%; flex-direction: column; gap: 0.75rem; }
+  .site-nav.open { display: flex; }
+  .cart-table th:nth-child(2), .cart-table td:nth-child(2) { display: none; }
+}

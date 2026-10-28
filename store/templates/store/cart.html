@@ -1,0 +1,53 @@
+{% extends "store/base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<h1>Your cart</h1>
+
+{% if lines %}
+  <table class="cart-table">
+    <thead>
+      <tr><th>Book</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for line in lines %}
+        <tr>
+          <td><a href="{% url 'book_detail' line.book.pk %}">{{ line.book.title }}</a></td>
+          <td>${{ line.book.price }}</td>
+          <td>{{ line.quantity }}</td>
+          <td>${{ line.line_total }}</td>
+          <td>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="remove">
+              <input type="hidden" name="book_id" value="{{ line.book.pk }}">
+              <button type="submit" class="button-link">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <form method="post" class="discount-form">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="discount">
+    <input name="code" placeholder="Discount code" value="{{ discount_code|default:'' }}">
+    <button type="submit" class="button-secondary">Apply</button>
+  </form>
+
+  <dl class="totals">
+    <dt>Subtotal</dt><dd>${{ subtotal }}</dd>
+    {% if discount_code %}<dt>Discount ({{ discount_code }})</dt><dd>applied</dd>{% endif %}
+    <dt class="grand">Total</dt><dd class="grand">${{ total }}</dd>
+  </dl>
+
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <button type="submit">Place order</button>
+  </form>
+{% else %}
+  <p class="empty">Your cart is empty. <a href="{% url 'book_list' %}">Browse books</a>.</p>
+{% endif %}
+{% endblock %}

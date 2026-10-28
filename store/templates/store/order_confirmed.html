@@ -1,0 +1,9 @@
+{% extends "store/base.html" %}
+
+{% block title %}Order placed{% endblock %}
+
+{% block content %}
+<h1>Thanks for your order!</h1>
+<p>You were charged <strong>${{ total }}</strong>. Your books are on their way.</p>
+<p><a href="{% url 'book_list' %}">Keep browsing</a></p>
+{% endblock %}

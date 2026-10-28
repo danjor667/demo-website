@@ -1,0 +1,46 @@
+{% extends "store/base.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<h1>Books</h1>
+
+<form class="filters" method="get">
+  <input type="search" name="q" value="{{ query }}" placeholder="Search by title or author">
+  <select name="category">
+    <option value="">All categories</option>
+    {% for value, label in categories %}
+      <option value="{{ value }}"{% if value == category %} selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Search</button>
+</form>
+
+{% if books %}
+  <ul class="book-grid">
+    {% for book in books %}
+      <li class="book-card">
+        <a href="{% url 'book_detail' book.pk %}">
+          <h2>{{ book.title }}</h2>
+          <p class="author">{{ book.author }}</p>
+          <p class="price">${{ book.price }}</p>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">No books match your search.</p>
+{% endif %}
+
+{% if total_pages > 1 %}
+  <nav class="pagination" aria-label="Pages">
+    {% for number in pages %}
+      {% if number == page %}
+        <span class="current">{{ number }}</span>
+      {% else %}
+        <a href="?q={{ query|urlencode }}&category={{ category|urlencode }}&page={{ number }}">{{ number }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+{% endif %}
+{% endblock %}
