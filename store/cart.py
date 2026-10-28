@@ -42,7 +42,7 @@ class Cart:
         ]
 
     def total(self):
-        return sum((line["book"].price for line in self.lines()), Decimal("0"))
+        return sum((line["line_total"] for line in self.lines()), Decimal("0"))
 
     def _save(self):
         self.session.modified = True
