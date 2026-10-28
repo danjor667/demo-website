@@ -38,7 +38,7 @@ a { color: var(--accent); }
 @media (min-width: 641px) {
   .site-header { position: relative; }
   .logo { position: absolute; left: 50%; transform: translateX(-50%); }
-  .site-nav { margin-left: auto; }
+  .site-nav { margin-right: auto; }
 }
 
 .container { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
