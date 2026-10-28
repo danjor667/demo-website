@@ -35,6 +35,12 @@ a { color: var(--accent); }
 .site-nav a { color: var(--ink); text-decoration: none; }
 .nav-toggle { display: none; }
 
+@media (min-width: 641px) {
+  .site-header { position: relative; }
+  .logo { position: absolute; left: 50%; transform: translateX(-50%); }
+  .site-nav { margin-left: auto; }
+}
+
 .container { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
 .site-footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size: 0.875rem; }
 
