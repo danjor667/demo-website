@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Get this run's token and report running
         run: |
-          RUN_ID=$(jq -r .inputs.run_id "$GITHUB_EVENT_PATH")
+          export RUN_ID=$(jq -r .inputs.run_id "$GITHUB_EVENT_PATH")
           [[ "$RUN_ID" =~ ^[0-9a-f-]{36}$ ]] || { echo "run_id is not a UUID"; exit 1; }
           echo "RUN_ID=$RUN_ID" >> "$GITHUB_ENV"
           OIDC=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
