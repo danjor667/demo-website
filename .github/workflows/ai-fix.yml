@@ -40,7 +40,7 @@ jobs:
     env:
       # Pinned here, never taken from an input, so whoever can dispatch this workflow cannot send
       # its OIDC token anywhere else. Include the /api/v1 context path.
-      AI_FIX_BACKEND: http://localhost:8080/api/v1
+      AI_FIX_BACKEND: https://side-leaf-text-proved.trycloudflare.com/api/v1
       # Must match the backend's AI_FIX_OIDC_AUDIENCE.
       AI_FIX_AUDIENCE: amaliai-feedback-ai-fix
       BASE_BRANCH: ${{ github.ref_name }}
